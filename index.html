@@ -11,7 +11,7 @@
 body{margin:0;font:15px/1.5 'IBM Plex Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink)}
 button,input,select{font:inherit;color:inherit}
 .login{min-height:100vh;display:grid;place-items:center;padding:20px}
-.lbox{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:32px;width:100%;max-width:380px}
+.lbox{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:32px;width:100%;max-width:380px;box-shadow:0 10px 30px rgba(37,99,235,.08)}
 .lbox h1{font-size:21px;margin:0 0 4px}.lbox p{margin:0 0 20px;color:var(--mut)}
 .demo{margin-top:18px;padding:10px 12px;background:var(--bg);border-radius:6px;font-size:13px;color:var(--mut)}
 .demo b{font-family:'IBM Plex Mono',monospace;font-weight:500;color:var(--ink)}
@@ -19,7 +19,8 @@ label{display:block;font-size:13px;font-weight:500;margin:12px 0 4px}
 input,select{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card)}
 input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid var(--pri);outline-offset:1px}
 .btn{background:var(--pri);color:#fff;border:0;padding:9px 16px;border-radius:6px;cursor:pointer;font-weight:500}
-[data-theme] .btn,.btn:hover{background:var(--pri2)}
+.btn:hover{background:var(--pri2)}
+.btn[disabled]{opacity:.6;cursor:not-allowed}
 .btn.full{width:100%;margin-top:18px}
 .btn.ghost{background:transparent;color:var(--pri);border:1px solid var(--line)}
 .btn.ghost:hover{background:var(--bg)}
@@ -35,27 +36,35 @@ aside .me{margin-top:auto;padding:12px 8px 0;border-top:1px solid rgba(255,255,2
 aside .me button{margin-top:8px;width:100%;background:transparent;border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:6px;padding:6px;cursor:pointer}
 main{padding:28px;max-width:1100px;width:100%}
 h2{margin:0 0 18px;font-size:22px}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:24px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:24px}
 .stat{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px;border-left:4px solid var(--pri)}
-.stat:nth-child(3){border-left-color:var(--warn)}
+.stat:nth-child(3){border-left-color:var(--warn)}.stat:nth-child(4){border-left-color:var(--bad)}
 .stat span{color:var(--mut);font-size:13px}.stat strong{display:block;font-size:30px;font-weight:600;font-family:'IBM Plex Mono',monospace}
 .panel{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px;margin-bottom:20px}
 .panel h3{margin:0 0 12px;font-size:16px}
-.bar{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}.bar input{max-width:320px}.bar .sp{flex:1}
+.bar,.fs{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}.bar input{max-width:320px}.bar .sp{flex:1}
+.fs input{max-width:260px}.fs select{max-width:190px}
 .tw{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:14px}
 th{text-align:left;font-weight:500;color:var(--mut);padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
 td{padding:9px 10px;border-bottom:1px solid var(--line)}tr:last-child td{border-bottom:0}
 .code{font-family:'IBM Plex Mono',monospace;font-size:13px}
-.tag{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;font-weight:500}
+.tag{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;font-weight:500;white-space:nowrap}
 .tag.ok{background:var(--okbg);color:var(--ok)}.tag.warn{background:var(--warnbg);color:var(--warn)}.tag.bad{background:var(--badbg);color:var(--bad)}
 .act{display:flex;gap:6px}.empty{color:var(--mut);padding:18px 0;text-align:center}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.kv span{color:var(--mut)}.kv:last-of-type{border-bottom:0}
+.barlist{display:flex;flex-direction:column;gap:12px}
+.barrow{display:grid;grid-template-columns:1fr auto;gap:4px 10px;font-size:14px}
+.barrow .track{grid-column:1/-1;height:8px;background:var(--bg);border-radius:99px;overflow:hidden}
+.barrow .fill{height:100%;background:var(--pri);border-radius:99px}
 dialog{border:1px solid var(--line);border-radius:10px;padding:24px;width:min(440px,92vw);background:var(--card);color:var(--ink)}
-dialog::backdrop{background:rgba(0,0,0,.45)}dialog h3{margin:0 0 4px}
+dialog::backdrop{background:rgba(10,20,40,.5)}dialog h3{margin:0 0 4px}
 .dact{display:flex;justify-content:flex-end;gap:8px;margin-top:20px}
 .err{color:var(--bad);font-size:13px;margin-top:10px;min-height:18px}
-.toast{position:fixed;bottom:20px;right:20px;background:var(--side);color:#fff;padding:10px 16px;border-radius:6px;z-index:9}
+.okmsg{color:var(--ok);font-size:13px;margin-top:10px}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--side);color:#fff;padding:10px 16px;border-radius:6px;z-index:9;box-shadow:0 8px 24px rgba(0,0,0,.2)}
 @media(max-width:780px){.layout{grid-template-columns:1fr}aside{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center}aside .brand{width:100%;padding-bottom:6px}aside .me{margin:0;border:0;padding:0;display:flex;gap:8px;align-items:center}aside .me button{margin:0;width:auto;padding:6px 10px}main{padding:16px}.grid2{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -63,154 +72,491 @@ dialog::backdrop{background:rgba(0,0,0,.45)}dialog h3{margin:0 0 4px}
 <body>
 <div id="root"></div>
 <script>
-// ===== Data layer (localStorage). Untuk produksi: ganti load()/save() dengan Supabase/Firebase. =====
-const K='lims.v1', SK='lims.session';
-const today=()=>new Date().toISOString().slice(0,10);
-const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function seed(){
-  const it=[['BR001','Laptop Lenovo','Komputer',5],['BR002','Mouse Logitech','Aksesori',10],['BR003','Keyboard Mechanical','Aksesori',8],['BR004','Proyektor Epson','Presentasi',3],['BR005','Monitor LG','Display',6],
-  ['BR006','Laptop ASUS','Komputer',4],['BR007','Laptop HP','Komputer',4],['BR008','Monitor Dell','Display',5],['BR009','Monitor Samsung','Display',4],['BR010','Keyboard Logitech','Aksesori',9],
-  ['BR011','Mouse Wireless','Aksesori',12],['BR012','Proyektor BenQ','Presentasi',2],['BR013','Router TP-Link','Jaringan',4],['BR014','Switch Cisco 24 Port','Jaringan',3],['BR015','Access Point Ubiquiti','Jaringan',3],
-  ['BR016','Kabel LAN 10m','Jaringan',20],['BR017','Kabel HDMI','Kabel',15],['BR018','Webcam Logitech C920','Aksesori',6],['BR019','Headset','Aksesori',8],['BR020','Layar Proyektor','Presentasi',2],
-  ['BR021','Hub USB','Aksesori',10],['BR022','Crimping Tool','Peralatan',4],['BR023','LAN Tester','Peralatan',3],['BR024','Stabilizer','Kelistrikan',5],['BR025','Stop Kontak Roll','Kelistrikan',10]];
-  return {seq:1,users:[{u:'admin',p:'admin123',n:'Administrator',r:'ADMIN',a:1},{u:'staff',p:'staff123',n:'Staff Laboratorium',r:'STAFF',a:1}],
-    items:it.map(([c,n,k,t])=>({c,n,k,t})),tx:[]};
+// ===== Data layer: localStorage (versi demo statis untuk Vercel) =====
+const root = document.getElementById('root');
+const pad = n => String(n).padStart(2,'0');
+const ymd = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const today = () => ymd(new Date());
+const plusDays = n => { const d = new Date(); d.setDate(d.getDate()+n); return ymd(d); };
+const esc = s => String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+const LS_KEY = 'lims.vercel.v2';
+const SEED_ITEMS = [
+  ['BR001','Laptop Lenovo','Komputer',5],['BR002','Mouse Logitech','Aksesori',10],
+  ['BR003','Keyboard Mechanical','Aksesori',8],['BR004','Proyektor Epson','Presentasi',3],
+  ['BR005','Monitor LG','Display',6],['BR006','Laptop ASUS','Komputer',4],
+  ['BR007','Laptop HP','Komputer',4],['BR008','Monitor Dell','Display',5],
+  ['BR009','Monitor Samsung','Display',4],['BR010','Keyboard Logitech','Aksesori',9],
+  ['BR011','Mouse Wireless','Aksesori',12],['BR012','Proyektor BenQ','Presentasi',2],
+  ['BR013','Router TP-Link','Jaringan',4],['BR014','Switch Cisco 24 Port','Jaringan',3],
+  ['BR015','Access Point Ubiquiti','Jaringan',3],['BR016','Kabel LAN 10m','Jaringan',20],
+  ['BR017','Kabel HDMI','Kabel',15],['BR018','Webcam Logitech C920','Aksesori',6],
+  ['BR019','Headset','Aksesori',8],['BR020','Layar Proyektor','Presentasi',2],
+  ['BR021','Hub USB','Aksesori',10],['BR022','Crimping Tool','Peralatan',4],
+  ['BR023','LAN Tester','Peralatan',3],['BR024','Stabilizer','Kelistrikan',5],
+  ['BR025','Stop Kontak Roll','Kelistrikan',10]
+];
+
+function seedStore(){
+  return {
+    seq: 1,
+    session: null,
+    users: [
+      {u:'admin', p:'admin123', n:'Administrator', r:'ADMIN', a:1},
+      {u:'staff', p:'staff123', n:'Staff Laboratorium', r:'STAFF', a:1}
+    ],
+    items: SEED_ITEMS.map(([c,n,k,t])=>({c,n,k,t})),
+    tx: []
+  };
 }
-function load(){try{const d=JSON.parse(localStorage.getItem(K));if(d&&d.items)return d}catch(e){}const d=seed();localStorage.setItem(K,JSON.stringify(d));return d}
-let db=load();
-const save=()=>localStorage.setItem(K,JSON.stringify(db));
-const getMe=()=>{const u=localStorage.getItem(SK);return db.users.find(x=>x.u===u&&x.a)||null};
-let me=getMe();
-const borrowed=c=>db.tx.filter(t=>t.c===c&&t.s==='DIPINJAM').reduce((a,t)=>a+t.q,0);
-const avail=i=>i.t-borrowed(i.c);
-const item=c=>db.items.find(i=>i.c===c);
-const isAdmin=()=>me&&me.r==='ADMIN';
-const toast=m=>{const e=document.createElement('div');e.className='toast';e.textContent=m;document.body.append(e);setTimeout(()=>e.remove(),2400)};
+function loadStore(){
+  try {
+    const d = JSON.parse(localStorage.getItem(LS_KEY));
+    if (d && Array.isArray(d.items) && Array.isArray(d.users)) return d;
+  } catch (e) {}
+  const d = seedStore();
+  localStorage.setItem(LS_KEY, JSON.stringify(d));
+  return d;
+}
+let store = loadStore();
+const saveStore = () => localStorage.setItem(LS_KEY, JSON.stringify(store));
+const selfUser = () => store.users.find(x => x.u === store.session && x.a) || null;
+
+function computeState(){
+  const self = selfUser();
+  const items = store.items.map(i => ({
+    ...i,
+    b: store.tx.filter(t => t.c === i.c && t.s === 'DIPINJAM').reduce((a,t)=>a+t.q,0)
+  }));
+  const allTx = [...store.tx].sort((a,b)=>b.id-a.id);
+  const tx = self ? (self.r === 'ADMIN' ? allTx : allTx.filter(t => t.by === self.u)) : [];
+  const users = self && self.r === 'ADMIN'
+    ? store.users.map(x => ({u:x.u, n:x.n, r:x.r, a:x.a}))
+    : [];
+  return { me: self ? {u:self.u, n:self.n, r:self.r} : null, items, tx, users };
+}
+
+let db = {me:null, items:[], tx:[], users:[]};
+let me = null;
+let csrf = '';
+const finish = data => { db = data; me = data.me; return data; };
+
+async function api(action, body = {}){
+  const self = selfUser();
+  const need = () => { if (!self) throw new Error('Silakan masuk terlebih dahulu.'); return self; };
+  const admin = () => { const s = need(); if (s.r !== 'ADMIN') throw new Error('Hanya Admin yang boleh melakukannya.'); return s; };
+
+  if (action === 'state') return finish(computeState());
+
+  if (action === 'login') {
+    const u = String(body.u || '').trim().toLowerCase(), p = String(body.p || '');
+    const x = store.users.find(v => v.u === u && v.p === p);
+    if (!x) throw new Error('Username atau password salah.');
+    if (!x.a) throw new Error('Akun tidak aktif. Hubungi Admin.');
+    store.session = x.u; saveStore();
+    return finish(computeState());
+  }
+
+  if (action === 'logout') { store.session = null; saveStore(); return finish(computeState()); }
+
+  if (action === 'user.password') {
+    const s = need();
+    const cur = String(body.current || ''), nw = String(body.new || '');
+    if (nw.length < 8) throw new Error('Password baru minimal 8 karakter.');
+    if (cur !== s.p) throw new Error('Password saat ini salah.');
+    if (nw === s.p) throw new Error('Password baru harus berbeda dari password lama.');
+    s.p = nw; saveStore();
+    return finish(computeState());
+  }
+
+  if (action === 'item.save') {
+    admin();
+    const c = String(body.c || '').trim().toUpperCase();
+    const n = String(body.n || '').trim();
+    const k = String(body.k || '').trim();
+    const t = parseInt(body.t, 10);
+    if (!c || !n || !k) throw new Error('Kode, nama, dan kategori wajib diisi.');
+    if (isNaN(t) || t < 0) throw new Error('Stok harus 0 atau lebih.');
+    const ex = store.items.find(i => i.c === c);
+    if (body.edit) {
+      if (!ex) throw new Error('Barang tidak ditemukan.');
+      const b = store.tx.filter(x => x.c === c && x.s === 'DIPINJAM').reduce((a,x)=>a+x.q,0);
+      if (t < b) throw new Error(`Stok tidak boleh kurang dari jumlah yang sedang dipinjam (${b}).`);
+      Object.assign(ex, {n, k, t});
+    } else {
+      if (ex) throw new Error('Kode barang sudah dipakai.');
+      store.items.push({c, n, k, t});
+    }
+    saveStore();
+    return finish(computeState());
+  }
+
+  if (action === 'item.delete') {
+    admin();
+    const c = String(body.c || '').trim().toUpperCase();
+    const b = store.tx.filter(x => x.c === c && x.s === 'DIPINJAM').reduce((a,x)=>a+x.q,0);
+    if (b > 0) throw new Error('Barang masih dipinjam, tidak bisa dihapus.');
+    if (!store.items.some(i => i.c === c)) throw new Error('Barang tidak ditemukan.');
+    store.items = store.items.filter(i => i.c !== c);
+    saveStore();
+    return finish(computeState());
+  }
+
+  if (action === 'tx.borrow') {
+    const s = need();
+    const b = String(body.b || '').trim();
+    const c = String(body.c || '').trim().toUpperCase();
+    const q = parseInt(body.q, 10);
+    const d = String(body.d || today());
+    const dd = String(body.due || plusDays(7));
+    if (!b) throw new Error('Nama peminjam wajib diisi.');
+    if (isNaN(q) || q < 1) throw new Error('Jumlah minimal 1.');
+    const it = store.items.find(i => i.c === c);
+    if (!it) throw new Error('Barang tidak ditemukan.');
+    const avail = it.t - store.tx.filter(x => x.c === c && x.s === 'DIPINJAM').reduce((a,x)=>a+x.q,0);
+    if (q > avail) throw new Error(`Jumlah melebihi stok tersedia (${avail}).`);
+    if (dd < d) throw new Error('Jatuh tempo tidak boleh sebelum tanggal pinjam.');
+    store.tx.push({id: store.seq++, b, c, q, d, dd, s:'DIPINJAM', rd:null, by:s.u});
+    saveStore();
+    return finish(computeState());
+  }
+
+  if (action === 'tx.return') {
+    const s = need();
+    const id = parseInt(body.id, 10);
+    const t = store.tx.find(x => x.id === id);
+    if (!t) throw new Error('Transaksi tidak ditemukan.');
+    if (t.s !== 'DIPINJAM') throw new Error('Transaksi ini sudah selesai.');
+    if (s.r !== 'ADMIN' && t.by !== s.u) throw new Error('Anda hanya dapat memproses transaksi yang Anda catat.');
+    t.s = 'SELESAI'; t.rd = today();
+    saveStore();
+    return finish(computeState());
+  }
+
+  if (action === 'user.save') {
+    admin();
+    const u = String(body.u || '').trim().toLowerCase();
+    const n = String(body.n || '').trim();
+    const p = String(body.p || '');
+    if (!u || !n) throw new Error('Username dan nama wajib diisi.');
+    const ex = store.users.find(x => x.u === u);
+    if (body.edit) {
+      if (!ex) throw new Error('Pengguna tidak ditemukan.');
+      ex.n = n;
+      if (p) { if (p.length < 8) throw new Error('Password minimal 8 karakter.'); ex.p = p; }
+    } else {
+      if (!/^[a-z0-9_.]{3,50}$/.test(u)) throw new Error('Username hanya huruf, angka, titik, underscore (3-50 karakter).');
+      if (p.length < 8) throw new Error('Password minimal 8 karakter.');
+      if (ex) throw new Error('Username sudah dipakai.');
+      store.users.push({u, p, n, r:'STAFF', a:1});
+    }
+    saveStore();
+    return finish(computeState());
+  }
+
+  if (action === 'user.toggle') {
+    admin();
+    const u = String(body.u || '').trim().toLowerCase();
+    const x = store.users.find(v => v.u === u);
+    if (!x) throw new Error('Pengguna tidak ditemukan.');
+    if (x.r !== 'STAFF') throw new Error('Akun Admin tidak dapat dinonaktifkan.');
+    if (x.u === self.u) throw new Error('Anda tidak dapat menonaktifkan akun sendiri.');
+    x.a = x.a ? 0 : 1;
+    saveStore();
+    return finish(computeState());
+  }
+
+  throw new Error('Aksi tidak dikenal.');
+}
+const item = c => db.items.find(i => i.c === c);
+const borrowed = c => { const i = item(c); return i ? i.b : 0; };
+const avail = i => i.t - i.b;
+const isAdmin = () => !!(me && me.r === 'ADMIN');
+const myTx = () => isAdmin() ? db.tx : db.tx.filter(t => t.by === me.u);
+const late = t => t.s === 'DIPINJAM' && !!t.dd && t.dd < today();
+const statusText = t => t.s === 'SELESAI' ? 'Selesai' : (late(t) ? 'Terlambat' : 'Dipinjam');
+const toast = m => { const e=document.createElement('div'); e.className='toast'; e.textContent=m; document.body.append(e); setTimeout(()=>e.remove(),2400); };
 
 // ===== Login =====
 function viewLogin(){
-  root.innerHTML=`<div class="login"><form class="lbox" id="lf"><h1>Lab Inventory & Borrowing</h1><p>Masuk untuk mengelola inventaris laboratorium.</p>
+  root.innerHTML = `<div class="login"><form class="lbox" id="lf"><h1>Lab Inventory & Borrowing</h1><p>Masuk untuk mengelola inventaris laboratorium.</p>
   <label for="u">Username</label><input id="u" autocomplete="username" required>
   <label for="p">Password</label><input id="p" type="password" autocomplete="current-password" required>
   <div class="err" id="le" role="alert"></div><button class="btn full">Masuk</button>
-  <div class="demo">Akun demo<br>Admin: <b>admin</b> / <b>admin123</b><br>Staff: <b>staff</b> / <b>staff123</b></div></form></div>`;
-  lf.onsubmit=e=>{e.preventDefault();db=load();const x=db.users.find(v=>v.u===u.value.trim()&&v.p===p.value);
-    if(!x){le.textContent='Username atau password salah.';return}
-    if(!x.a){le.textContent='Akun dinonaktifkan. Hubungi Admin.';return}
-    localStorage.setItem(SK,x.u);me=x;location.hash='#dashboard';render()};
+  <p style="margin-top:16px;font-size:12px">Lupa password? Hubungi Admin laboratorium.</p></form></div>`;
+  lf.onsubmit = async e => {
+    e.preventDefault();
+    le.textContent = '';
+    const btn = lf.querySelector('button');
+    btn.disabled = true;
+    try {
+      await api('login', {u:u.value.trim(), p:p.value});
+      location.hash = '#dashboard';
+      render();
+    } catch (err) {
+      le.textContent = err.message;
+    } finally {
+      btn.disabled = false;
+    }
+  };
 }
-function logout(){localStorage.removeItem(SK);me=null;location.hash='';render()}
+
+async function logout(){
+  try { await api('logout'); } catch (err) {}
+  db = {me:null, items:[], tx:[], users:[]};
+  me = null;
+  location.hash = '';
+  render();
+}
 
 // ===== Shell =====
-const NAV=[['dashboard','Dashboard',1,1],['items','Daftar Barang',1,1],['borrow','Peminjaman',1,1],['return','Pengembalian',1,1],['history','Riwayat',1,1],['users','Pengguna',1,0]];
+const NAV = [['dashboard','Dashboard',1,1],['items','Daftar Barang',1,1],['borrow','Peminjaman',1,1],['return','Pengembalian',1,1],['history','Riwayat',1,1],['users','Pengguna',1,0],['profile','Profil',1,1]];
 function render(){
-  if(!me){viewLogin();return}
-  let r=(location.hash||'#dashboard').slice(1);
-  const nav=NAV.filter(n=>isAdmin()?n[2]:n[3]);
-  if(!nav.find(n=>n[0]===r))r='dashboard';
-  root.innerHTML=`<div class="layout"><aside><div class="brand">Lab Inventory<small>Borrowing Management</small></div>
+  if (!me) { viewLogin(); return; }
+  let r = (location.hash || '#dashboard').slice(1);
+  const nav = NAV.filter(n => isAdmin() ? n[2] : n[3]);
+  if (!nav.find(n => n[0] === r)) r = 'dashboard';
+  root.innerHTML = `<div class="layout"><aside><div class="brand">Lab Inventory<small>Borrowing Management</small></div>
   ${nav.map(n=>`<a href="#${n[0]}" class="${n[0]===r?'on':''}">${n[1]}</a>`).join('')}
   <div class="me"><div>${esc(me.n)}<br><span class="tag ${isAdmin()?'ok':'warn'}">${me.r}</span></div><button onclick="logout()">Keluar</button></div></aside><main id="v"></main></div>`;
-  ({dashboard:vDash,items:vItems,borrow:vBorrow,return:vReturn,history:vHist,users:vUsers})[r]();
+  ({dashboard:vDash,items:vItems,borrow:vBorrow,return:vReturn,history:vHist,users:vUsers,profile:vProfile})[r]();
 }
-window.onhashchange=()=>{db=load();render()};
+window.onhashchange = () => render();
 
-const tagS=s=>s==='DIPINJAM'?'<span class="tag warn">Dipinjam</span>':'<span class="tag ok">Selesai</span>';
-const txRows=(list,withBy=true)=>list.length?`<div class="tw"><table><thead><tr><th>Tanggal</th><th>Peminjam</th><th>Barang</th><th>Jml</th><th>Status</th><th>Dikembalikan</th>${withBy?'<th>Dicatat oleh</th>':''}</tr></thead><tbody>
-${list.map(t=>`<tr><td>${esc(t.d)}</td><td>${esc(t.b)}</td><td>${esc(item(t.c)?.n||t.c)}</td><td>${t.q}</td><td>${tagS(t.s)}</td><td>${esc(t.rd||'-')}</td>${withBy?`<td>${esc(t.by)}</td>`:''}</tr>`).join('')}</tbody></table></div>`:'<div class="empty">Belum ada transaksi.</div>';
-const myTx=()=>isAdmin()?db.tx:db.tx.filter(t=>t.by===me.u);
+const tagS = t => t.s === 'SELESAI' ? '<span class="tag ok">Selesai</span>' : (late(t) ? '<span class="tag bad">Terlambat</span>' : '<span class="tag warn">Dipinjam</span>');
+const txRows = (list, withBy=true) => list.length ? `<div class="tw"><table><thead><tr><th>Tanggal</th><th>Jatuh tempo</th><th>Peminjam</th><th>Barang</th><th>Jml</th><th>Status</th><th>Dikembalikan</th>${withBy?'<th>Dicatat oleh</th>':''}</tr></thead><tbody>
+${list.map(t=>`<tr><td>${esc(t.d)}</td><td>${esc(t.dd||'-')}</td><td>${esc(t.b)}</td><td>${esc(item(t.c)?.n||t.c)}</td><td>${t.q}</td><td>${tagS(t)}</td><td>${esc(t.rd||'-')}</td>${withBy?`<td>${esc(t.by)}</td>`:''}</tr>`).join('')}</tbody></table></div>` : '<div class="empty">Belum ada transaksi.</div>';
 
 // ===== Dashboard =====
+function topItems(limit=5){
+  const m = {};
+  db.tx.forEach(t => { m[t.c] = (m[t.c]||0) + t.q; });
+  return Object.entries(m).map(([c,q])=>({c, q, name:item(c)?.n||c})).sort((a,b)=>b.q-a.q).slice(0,limit);
+}
 function vDash(){
-  const total=db.items.reduce((a,i)=>a+i.t,0),out=db.tx.filter(t=>t.s==='DIPINJAM').reduce((a,t)=>a+t.q,0);
-  v.innerHTML=`<h2>Dashboard${isAdmin()?' Admin':' Staff'}</h2><div class="stats">
+  const total = db.items.reduce((a,i)=>a+i.t,0);
+  const out = db.items.reduce((a,i)=>a+i.b,0);
+  const lateCount = db.tx.filter(late).length;
+  const top = topItems();
+  const max = top.length ? top[0].q : 1;
+  v.innerHTML = `<h2>Dashboard${isAdmin()?' Admin':' Staff'}</h2><div class="stats">
   <div class="stat"><span>Total barang (unit)</span><strong>${total}</strong><span>${db.items.length} jenis barang</span></div>
   <div class="stat"><span>Barang tersedia</span><strong>${total-out}</strong></div>
   <div class="stat"><span>Barang dipinjam</span><strong>${out}</strong></div>
+  <div class="stat"><span>Terlambat</span><strong>${lateCount}</strong><span>transaksi lewat jatuh tempo</span></div>
   <div class="stat"><span>Total transaksi</span><strong>${db.tx.length}</strong></div></div>
-  <div class="panel"><h3>Aktivitas terbaru</h3>${txRows([...db.tx].reverse().slice(0,6))}</div>`;
+  <div class="panel"><h3>Barang paling sering dipinjam</h3>${top.length?`<div class="barlist">${top.map(x=>`<div class="barrow"><span>${esc(x.name)}</span><span class="code">${x.q} unit</span><div class="track"><div class="fill" style="width:${Math.max(6,Math.round(x.q/max*100))}%"></div></div></div>`).join('')}</div>`:'<div class="empty">Belum ada data peminjaman.</div>'}</div>
+  <div class="panel"><h3>Aktivitas terbaru</h3>${txRows(db.tx.slice(0,6))}</div>`;
 }
 
 // ===== Barang =====
-let q='';
+let q = '';
 function itemTable(){
-  const l=db.items.filter(i=>(i.c+i.n+i.k).toLowerCase().includes(q.toLowerCase()));
-  return l.length?`<div class="tw"><table><thead><tr><th>Kode</th><th>Nama</th><th>Kategori</th><th>Stok total</th><th>Tersedia</th><th>Status</th>${isAdmin()?'<th></th>':''}</tr></thead><tbody>
+  const l = db.items.filter(i=>(i.c+i.n+i.k).toLowerCase().includes(q.toLowerCase()));
+  return l.length ? `<div class="tw"><table><thead><tr><th>Kode</th><th>Nama</th><th>Kategori</th><th>Stok total</th><th>Tersedia</th><th>Status</th>${isAdmin()?'<th></th>':''}</tr></thead><tbody>
   ${l.map(i=>{const a=avail(i);return`<tr><td class="code">${esc(i.c)}</td><td>${esc(i.n)}</td><td>${esc(i.k)}</td><td>${i.t}</td><td>${a}</td><td>${a>0?'<span class="tag ok">Tersedia</span>':'<span class="tag bad">Habis</span>'}</td>
-  ${isAdmin()?`<td><div class="act"><button class="btn ghost sm" onclick="itemForm('${i.c}')">Edit</button><button class="btn danger sm" onclick="delItem('${i.c}')">Hapus</button></div></td>`:''}</tr>`}).join('')}</tbody></table></div>`:'<div class="empty">Barang tidak ditemukan.</div>';
+  ${isAdmin()?`<td><div class="act"><button class="btn ghost sm" onclick="itemForm('${i.c}')">Edit</button><button class="btn danger sm" onclick="delItem('${i.c}')">Hapus</button></div></td>`:''}</tr>`}).join('')}</tbody></table></div>` : '<div class="empty">Barang tidak ditemukan.</div>';
 }
 function vItems(){
-  v.innerHTML=`<h2>Daftar Barang</h2><div class="panel"><div class="bar"><input id="sq" placeholder="Cari kode, nama, atau kategori" value="${esc(q)}" aria-label="Cari barang"><span class="sp"></span>${isAdmin()?'<button class="btn" onclick="itemForm()">Tambah barang</button>':''}</div><div id="it">${itemTable()}</div></div>`;
-  sq.oninput=()=>{q=sq.value;it.innerHTML=itemTable()};
+  v.innerHTML = `<h2>Daftar Barang</h2><div class="panel"><div class="bar"><input id="sq" placeholder="Cari kode, nama, atau kategori" value="${esc(q)}" aria-label="Cari barang"><span class="sp"></span><button class="btn ghost" onclick="exportItems()">Ekspor CSV</button>${isAdmin()?'<button class="btn" onclick="itemForm()">Tambah barang</button>':''}</div><div id="it">${itemTable()}</div></div>`;
+  sq.oninput = () => { q = sq.value; it.innerHTML = itemTable(); };
 }
-function modal(title,body,onOk){
-  const d=document.createElement('dialog');
-  d.innerHTML=`<form><h3>${title}</h3>${body}<div class="err" role="alert"></div><div class="dact"><button type="button" class="btn ghost" value="x">Batal</button><button class="btn">Simpan</button></div></form>`;
-  document.body.append(d);d.showModal();
-  const f=d.querySelector('form'),er=d.querySelector('.err');
-  d.querySelector('[value=x]').onclick=()=>d.close();d.onclose=()=>d.remove();
-  f.onsubmit=e=>{e.preventDefault();const r=onOk(Object.fromEntries(new FormData(f)));if(r)er.textContent=r;else d.close()};
+function modal(title, body, onOk){
+  const d = document.createElement('dialog');
+  d.innerHTML = `<form><h3>${title}</h3>${body}<div class="err" role="alert"></div><div class="dact"><button type="button" class="btn ghost" value="x">Batal</button><button class="btn">Simpan</button></div></form>`;
+  document.body.append(d); d.showModal();
+  const f = d.querySelector('form'), er = d.querySelector('.err'), ok = d.querySelector('button:not([value=x])');
+  d.querySelector('[value=x]').onclick = () => d.close();
+  d.onclose = () => d.remove();
+  f.onsubmit = async e => {
+    e.preventDefault();
+    ok.disabled = true;
+    try {
+      const r = await onOk(Object.fromEntries(new FormData(f)));
+      if (r) er.textContent = r; else d.close();
+    } catch (err) {
+      er.textContent = err.message;
+    } finally {
+      ok.disabled = false;
+    }
+  };
 }
 function itemForm(code){
-  const i=code?item(code):{c:'',n:'',k:'',t:1},ed=!!code;
-  modal(ed?'Edit barang':'Tambah barang',`<label>Kode</label><input name="c" value="${esc(i.c)}" ${ed?'readonly':''} required>
+  const i = code ? item(code) : {c:'',n:'',k:'',t:1}, ed = !!code;
+  modal(ed?'Edit barang':'Tambah barang', `<label>Kode</label><input name="c" value="${esc(i.c)}" ${ed?'readonly':''} required>
   <label>Nama barang</label><input name="n" value="${esc(i.n)}" required><label>Kategori</label><input name="k" value="${esc(i.k)}" required>
-  <label>Stok total</label><input name="t" type="number" min="0" value="${i.t}" required>`,f=>{
-    const t=parseInt(f.t);if(isNaN(t)||t<0)return'Stok harus angka 0 atau lebih.';
-    if(ed){if(t<borrowed(code))return`Stok tidak boleh kurang dari jumlah yang sedang dipinjam (${borrowed(code)}).`;Object.assign(item(code),{n:f.n.trim(),k:f.k.trim(),t})}
-    else{const c=f.c.trim().toUpperCase();if(item(c))return'Kode barang sudah dipakai.';db.items.push({c,n:f.n.trim(),k:f.k.trim(),t})}
-    save();toast('Barang disimpan');vItems()});
+  <label>Stok total</label><input name="t" type="number" min="0" value="${i.t}" required>`, async f => {
+    const t = parseInt(f.t);
+    if (isNaN(t) || t < 0) return 'Stok harus angka 0 atau lebih.';
+    if (ed && t < borrowed(code)) return `Stok tidak boleh kurang dari jumlah yang sedang dipinjam (${borrowed(code)}).`;
+    await api('item.save', {c: ed ? code : f.c.trim().toUpperCase(), n:f.n.trim(), k:f.k.trim(), t, edit:ed});
+    toast('Barang disimpan'); vItems();
+  });
 }
-function delItem(c){
-  if(borrowed(c)>0)return alert('Barang masih dipinjam, tidak bisa dihapus.');
-  if(confirm(`Hapus ${item(c).n}?`)){db.items=db.items.filter(i=>i.c!==c);save();toast('Barang dihapus');vItems()}
+async function delItem(c){
+  if (borrowed(c) > 0) return alert('Barang masih dipinjam, tidak bisa dihapus.');
+  if (!confirm(`Hapus ${item(c).n}?`)) return;
+  try { await api('item.delete', {c}); toast('Barang dihapus'); vItems(); }
+  catch (err) { alert(err.message); }
+}
+function exportItems(){
+  csv(`barang-${today()}.csv`, ['Kode','Nama','Kategori','Stok Total','Tersedia','Status'],
+    db.items.map(i=>[i.c,i.n,i.k,i.t,avail(i),avail(i)>0?'Tersedia':'Habis']));
 }
 
 // ===== Peminjaman =====
 function vBorrow(){
-  const opts=db.items.filter(i=>avail(i)>0);
-  v.innerHTML=`<h2>Peminjaman Barang</h2><div class="panel"><h3>Catat peminjaman</h3><form id="bf"><div class="grid2">
+  const opts = db.items.filter(i=>avail(i)>0);
+  v.innerHTML = `<h2>Peminjaman Barang</h2><div class="panel"><h3>Catat peminjaman</h3><form id="bf"><div class="grid2">
   <div><label>Nama peminjam</label><input name="b" required></div>
   <div><label>Tanggal peminjaman</label><input name="d" type="date" value="${today()}" required></div>
   <div><label>Barang</label><select name="c" required>${opts.map(i=>`<option value="${esc(i.c)}">${esc(i.c)} - ${esc(i.n)} (tersedia ${avail(i)})</option>`).join('')}</select></div>
-  <div><label>Jumlah</label><input name="q" type="number" min="1" value="1" required></div></div>
+  <div><label>Jumlah</label><input name="q" type="number" min="1" value="1" required></div>
+  <div><label>Jatuh tempo</label><input name="due" type="date" value="${plusDays(7)}" required></div>
+  </div>
   <div class="err" id="be" role="alert"></div><button class="btn">Simpan transaksi</button></form></div>
-  <div class="panel"><h3>Transaksi terakhir</h3>${txRows([...myTx()].reverse().slice(0,8))}</div>`;
-  bf.onsubmit=e=>{e.preventDefault();const f=Object.fromEntries(new FormData(bf)),it=item(f.c),n=parseInt(f.q);
-    if(!it)return be.textContent='Pilih barang.';if(n<1||n>avail(it))return be.textContent=`Jumlah harus 1 sampai ${avail(it)}.`;
-    db.tx.push({id:db.seq++,b:f.b.trim(),c:f.c,q:n,d:f.d,s:'DIPINJAM',rd:null,by:me.u});save();toast('Peminjaman tersimpan');vBorrow()};
+  <div class="panel"><h3>Transaksi terakhir</h3>${txRows(myTx().slice(0,8))}</div>`;
+  bf.onsubmit = async e => {
+    e.preventDefault();
+    const f = Object.fromEntries(new FormData(bf)), it = item(f.c), n = parseInt(f.q);
+    if (!it) return be.textContent = 'Pilih barang.';
+    if (n < 1 || n > avail(it)) return be.textContent = `Jumlah harus 1 sampai ${avail(it)}.`;
+    if (f.due && f.due < f.d) return be.textContent = 'Jatuh tempo tidak boleh sebelum tanggal pinjam.';
+    const btn = bf.querySelector('button');
+    btn.disabled = true;
+    try {
+      await api('tx.borrow', {b:f.b.trim(), c:f.c, q:n, d:f.d, due:f.due});
+      toast('Peminjaman tersimpan'); vBorrow();
+    } catch (err) {
+      be.textContent = err.message;
+    } finally {
+      btn.disabled = false;
+    }
+  };
 }
 
 // ===== Pengembalian =====
 function vReturn(){
-  const l=db.tx.filter(t=>t.s==='DIPINJAM');
-  v.innerHTML=`<h2>Pengembalian Barang</h2><div class="panel"><h3>Barang yang sedang dipinjam</h3>${l.length?`<div class="tw"><table><thead><tr><th>Tanggal</th><th>Peminjam</th><th>Barang</th><th>Jml</th><th></th></tr></thead><tbody>
-  ${l.map(t=>`<tr><td>${esc(t.d)}</td><td>${esc(t.b)}</td><td>${esc(item(t.c)?.n||t.c)}</td><td>${t.q}</td><td><button class="btn sm" onclick="doReturn(${t.id})">Proses pengembalian</button></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">Tidak ada barang yang sedang dipinjam.</div>'}</div>`;
+  const l = db.tx.filter(t=>t.s === 'DIPINJAM');
+  v.innerHTML = `<h2>Pengembalian Barang</h2><div class="panel"><h3>Barang yang sedang dipinjam</h3>${l.length?`<div class="tw"><table><thead><tr><th>Tanggal</th><th>Jatuh tempo</th><th>Peminjam</th><th>Barang</th><th>Jml</th><th>Status</th><th></th></tr></thead><tbody>
+  ${l.map(t=>`<tr><td>${esc(t.d)}</td><td>${esc(t.dd||'-')}</td><td>${esc(t.b)}</td><td>${esc(item(t.c)?.n||t.c)}</td><td>${t.q}</td><td>${tagS(t)}</td><td><button class="btn sm" onclick="doReturn(${t.id})">Proses pengembalian</button></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">Tidak ada barang yang sedang dipinjam.</div>'}</div>`;
 }
-function doReturn(id){const t=db.tx.find(x=>x.id===id);if(!t||t.s!=='DIPINJAM')return;t.s='SELESAI';t.rd=today();save();toast('Barang dikembalikan, stok diperbarui');vReturn()}
+async function doReturn(id){
+  try { await api('tx.return', {id}); toast('Barang dikembalikan, stok diperbarui'); vReturn(); }
+  catch (err) { alert(err.message); }
+}
 
 // ===== Riwayat =====
+let hq = '', hs = '';
+function histList(){
+  return myTx().filter(t => {
+    if (hs === 'DIPINJAM' && t.s !== 'DIPINJAM') return false;
+    if (hs === 'SELESAI' && t.s !== 'SELESAI') return false;
+    if (hs === 'TERLAMBAT' && !late(t)) return false;
+    if (hq) {
+      const s = (t.b+' '+(item(t.c)?.n||t.c)+' '+t.by+' '+(t.dd||'')).toLowerCase();
+      if (!s.includes(hq.toLowerCase())) return false;
+    }
+    return true;
+  });
+}
+function histTable(){
+  const l = histList();
+  return l.length ? txRows(l) : '<div class="empty">Tidak ada transaksi yang cocok.</div>';
+}
 function vHist(){
-  v.innerHTML=`<h2>Riwayat Peminjaman & Pengembalian</h2><div class="panel">${isAdmin()?'':'<p style="color:var(--mut);margin-top:0">Menampilkan transaksi yang Anda catat.</p>'}${txRows([...myTx()].reverse())}</div>`;
+  v.innerHTML = `<h2>Riwayat Peminjaman & Pengembalian</h2><div class="panel">
+  ${isAdmin()?'':'<p style="color:var(--mut);margin-top:0">Menampilkan transaksi yang Anda catat.</p>'}
+  <div class="fs"><input id="hq" placeholder="Cari peminjam / barang" value="${esc(hq)}" aria-label="Cari riwayat">
+  <select id="hs" aria-label="Filter status">
+    <option value="" ${hs===''?'selected':''}>Semua status</option>
+    <option value="DIPINJAM" ${hs==='DIPINJAM'?'selected':''}>Dipinjam</option>
+    <option value="TERLAMBAT" ${hs==='TERLAMBAT'?'selected':''}>Terlambat</option>
+    <option value="SELESAI" ${hs==='SELESAI'?'selected':''}>Selesai</option>
+  </select><span class="sp"></span><button class="btn ghost" onclick="exportHist()">Ekspor CSV</button></div>
+  <div id="ht">${histTable()}</div></div>`;
+  document.getElementById('hq').oninput = e => { hq = e.target.value; ht.innerHTML = histTable(); };
+  document.getElementById('hs').onchange = e => { hs = e.target.value; ht.innerHTML = histTable(); };
+}
+function exportHist(){
+  csv(`riwayat-${today()}.csv`, ['Tanggal','Jatuh Tempo','Peminjam','Barang','Jumlah','Status','Dikembalikan','Dicatat Oleh'],
+    histList().map(t=>[t.d,t.dd||'-',t.b,item(t.c)?.n||t.c,t.q,statusText(t),t.rd||'-',t.by]));
 }
 
 // ===== Pengguna (Admin) =====
 function vUsers(){
-  v.innerHTML=`<h2>Manajemen Pengguna</h2><div class="panel"><div class="bar"><span class="sp"></span><button class="btn" onclick="userForm()">Tambah Staff</button></div><div class="tw"><table><thead><tr><th>Username</th><th>Nama</th><th>Role</th><th>Status</th><th></th></tr></thead><tbody>
+  v.innerHTML = `<h2>Manajemen Pengguna</h2><div class="panel"><div class="bar"><span class="sp"></span><button class="btn" onclick="userForm()">Tambah Staff</button></div><div class="tw"><table><thead><tr><th>Username</th><th>Nama</th><th>Role</th><th>Status</th><th></th></tr></thead><tbody>
   ${db.users.map(x=>`<tr><td class="code">${esc(x.u)}</td><td>${esc(x.n)}</td><td>${x.r}</td><td>${x.a?'<span class="tag ok">Aktif</span>':'<span class="tag bad">Nonaktif</span>'}</td>
   <td><div class="act"><button class="btn ghost sm" onclick="userForm('${esc(x.u)}')">Edit</button>${x.r==='STAFF'?`<button class="btn ghost sm" onclick="toggleUser('${esc(x.u)}')">${x.a?'Nonaktifkan':'Aktifkan'}</button>`:''}</div></td></tr>`).join('')}</tbody></table></div></div>`;
 }
-function toggleUser(u){const x=db.users.find(v=>v.u===u);x.a=x.a?0:1;save();toast(x.a?'Akun diaktifkan':'Akun dinonaktifkan');vUsers()}
-function userForm(u){
-  const x=u?db.users.find(v=>v.u===u):{u:'',n:'',a:1},ed=!!u;
-  modal(ed?'Edit pengguna':'Tambah akun Staff',`<label>Username</label><input name="u" value="${esc(x.u)}" ${ed?'readonly':''} required pattern="[A-Za-z0-9_.]+" title="Huruf, angka, titik, underscore">
-  <label>Nama lengkap</label><input name="n" value="${esc(x.n)}" required>
-  <label>Password ${ed?'(kosongkan jika tidak diubah)':''}</label><input name="p" type="password" minlength="6" ${ed?'':'required'}>`,f=>{
-    if(ed){x.n=f.n.trim();if(f.p)x.p=f.p}
-    else{const n=f.u.trim().toLowerCase();if(db.users.some(v=>v.u===n))return'Username sudah dipakai.';db.users.push({u:n,p:f.p,n:f.n.trim(),r:'STAFF',a:1})}
-    save();toast('Pengguna disimpan');vUsers()});
+async function toggleUser(u){
+  try { await api('user.toggle', {u}); toast('Status akun diperbarui'); vUsers(); }
+  catch (err) { alert(err.message); }
 }
-render();
+function userForm(u){
+  const x = u ? db.users.find(v=>v.u===u) : {u:'',n:'',a:1}, ed = !!u;
+  modal(ed?'Edit pengguna':'Tambah akun Staff', `<label>Username</label><input name="u" value="${esc(x.u)}" ${ed?'readonly':''} required pattern="[A-Za-z0-9_.]+" title="Huruf, angka, titik, underscore">
+  <label>Nama lengkap</label><input name="n" value="${esc(x.n)}" required>
+  <label>Password ${ed?'(kosongkan jika tidak diubah)':''}</label><input name="p" type="password" ${ed?'':'minlength="8" required'}>`, async f => {
+    if (!ed && f.p.length < 8) return 'Password minimal 8 karakter.';
+    await api('user.save', {u: ed ? u : f.u.trim().toLowerCase(), n:f.n.trim(), p:f.p, edit:ed});
+    toast('Pengguna disimpan'); vUsers();
+  });
+}
+
+// ===== Profil =====
+function vProfile(){
+  v.innerHTML = `<h2>Profil & Keamanan</h2><div class="panel" style="max-width:560px">
+  <h3>Informasi akun</h3>
+  <div class="kv"><span>Username</span><b>${esc(me.u)}</b></div>
+  <div class="kv"><span>Nama</span><b>${esc(me.n)}</b></div>
+  <div class="kv"><span>Peran</span><b>${me.r}</b></div>
+  <h3 style="margin:24px 0 2px">Ganti password</h3>
+  <form id="pf"><label>Password saat ini</label><input name="current" type="password" autocomplete="current-password" required>
+  <label>Password baru</label><input name="new" type="password" autocomplete="new-password" minlength="8" required>
+  <label>Ulangi password baru</label><input name="confirm" type="password" autocomplete="new-password" minlength="8" required>
+  <div class="err" id="pe" role="alert"></div><div class="okmsg" id="po" role="status"></div>
+  <button class="btn" style="margin-top:12px">Simpan password</button></form></div>`;
+  pe.textContent = ''; po.textContent = '';
+  pf.onsubmit = async e => {
+    e.preventDefault();
+    pe.textContent = ''; po.textContent = '';
+    const f = Object.fromEntries(new FormData(pf));
+    if (f.new !== f.confirm) return pe.textContent = 'Konfirmasi password tidak sama.';
+    if (f.new.length < 8) return pe.textContent = 'Password baru minimal 8 karakter.';
+    const btn = pf.querySelector('button');
+    btn.disabled = true;
+    try {
+      await api('user.password', {current:f.current, new:f.new});
+      po.textContent = 'Password berhasil diperbarui.';
+      pf.reset();
+    } catch (err) {
+      pe.textContent = err.message;
+    } finally {
+      btn.disabled = false;
+    }
+  };
+}
+
+// ===== CSV =====
+function csv(filename, header, rows){
+  const all = [header, ...rows];
+  const text = all.map(r => r.map(v => {
+    const s = String(v ?? '');
+    return /[",;\n]/.test(s) ? '"' + s.replace(/"/g,'""') + '"' : s;
+  }).join(';')).join('\r\n');
+  const blob = new Blob(['\ufeff' + text], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
+}
+
+// ===== Boot =====
+(async function boot(){
+  try { await api('state'); } catch (err) { toast(err.message); }
+  render();
+})();
 </script>
 </body>
 </html>
